@@ -1,6 +1,10 @@
 require "email_error_reporter/version"
-require "email_error_reporter/railtie"
+require "email_error_reporter/engine"
 
 module EmailErrorReporter
-  # Your code goes here...
+  extend ActiveSupport::Autoload
+
+  autoload :ErrorMailer
+  autoload :Subscriber
+  autoload :ExceptionSerializer
 end

@@ -1,0 +1,6 @@
+<h1><%= @error.class %></h1>
+<p><%= @error.message %></p>
+
+<div>
+<%= render(partial: "frame", collection: @backtrace) || render("no_backtrace") -%>
+</div>
