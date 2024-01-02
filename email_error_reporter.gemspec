@@ -5,9 +5,9 @@ Gem::Specification.new do |spec|
   spec.version     = EmailErrorReporter::VERSION
   spec.authors     = ["Niklas Haeusele"]
   spec.email       = ["niklas.haeusele@hey.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of EmailErrorReporter."
-  spec.description = "TODO: Description of EmailErrorReporter."
+  spec.homepage    = "https://github.com/codergeek121/email_error_reporter"
+  spec.summary     = "Report your Rails errors via email."
+  spec.description = "Report your Rails errors via email."
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
@@ -15,8 +15,8 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = spec.homepage
+  # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
