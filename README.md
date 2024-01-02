@@ -3,7 +3,7 @@
 > [!CAUTION]
 > This is very early prototype
 
-`email_error_reporter` uses the new [Rails error reporting API](https://guides.rubyonrails.org/error_reporting.html#error-reporting) to send emails whenever an exception is being reported. It works out of the box with HTTP requests, job errors and the rails runner errors.
+`email_error_reporter` uses the new [Rails error reporting API](https://guides.rubyonrails.org/error_reporting.html#error-reporting) to send emails whenever an exception is being reported. It works out of the box with HTTP requests, jobs and the rails runner.
 
 ## Installation
 
