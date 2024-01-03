@@ -28,6 +28,16 @@ All exceptions are reported automatically. No additional code required.
 
 Please consult the [official guides](https://guides.rubyonrails.org/error_reporting.html) for an introduction to the error reporting API.
 
+## Test your setup
+
+You can use the built-in rake task `rake email_error_reporter:check` to check if everything works correctly in your setup.
+
+If you're using Kamal, you can run the following command to test the setup in production:
+
+```
+kamal app exec -p 'bundle exec rake email_error_reporter:test_email'
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
