@@ -2,5 +2,7 @@
 <p>some message</p>
 
 <div>
-<p>No backtrace available</p>
+  <table border="1">
+    <tr><td>No backtrace available</td></tr>
+  </table>
 </div>

@@ -2,5 +2,7 @@
 <p><%= @error.message %></p>
 
 <div>
-<%= render(partial: "frame", collection: @backtrace) || render("no_backtrace") -%>
+  <table border="1">
+    <%= render(partial: "frame", collection: @backtrace) || render("no_backtrace") -%>
+  </table>
 </div>

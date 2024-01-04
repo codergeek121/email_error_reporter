@@ -9,8 +9,14 @@ module EmailErrorReporter
 
       @backtrace = Array.wrap(error.backtrace)
 
+      severity_to_emoji = {
+        error: "🔥",
+        warning: "⚠️",
+        info: "ℹ️"
+      }
+
       mail(
-        subject: "#{error.class}",
+        subject: "#{severity_to_emoji.fetch(@severity)}  #{error.class}",
         to: Rails.application.config.email_error_reporter.to
       )
     end
