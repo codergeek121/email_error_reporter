@@ -5,18 +5,6 @@ class EmailErrorReporter::ErrorMailerTest < ActionMailer::TestCase
     @exception = Exception.new("some message")
   end
 
-  test "renders the template correctly" do
-    assert_equal [], error_mail.to
-    assert_equal read_fixture("error").join, error_mail.body.to_s
-  end
-
-  test "renders a backtrace" do
-    @exception.set_backtrace(["foo", "bar"])
-
-    assert_equal [], error_mail.to
-    assert_equal read_fixture("error_with_backtrace").join, error_mail.body.to_s
-  end
-
   test "severity: error" do
     email = error_mail(severity: :error)
     assert_equal "🔥" + "  Exception", email.subject
@@ -32,6 +20,21 @@ class EmailErrorReporter::ErrorMailerTest < ActionMailer::TestCase
     assert_equal "ℹ️" + "  Exception", email.subject
   end
 
+  test "email content" do
+    @exception.set_backtrace(["foo", "bar"])
+    email = error_mail(handled: true, severity: :info).deliver_now
+    assert_dom_email do
+      assert_dom "h1", "Exception"
+      assert_dom "h2", "some message"
+      assert_dom test_id("source"), "Source: No source present"
+      assert_dom test_id("handled"), "Handled: ✅"
+      assert_dom test_id("context"), "{}"
+      assert_dom "table" do
+        assert_dom "tr", 2
+      end
+    end
+  end
+
   private
 
   def error_mail(**kwargs)
@@ -42,5 +45,9 @@ class EmailErrorReporter::ErrorMailerTest < ActionMailer::TestCase
       context: {},
       **kwargs
     )
+  end
+
+  def test_id(value)
+    "[data-test-id='#{value}']"
   end
 end

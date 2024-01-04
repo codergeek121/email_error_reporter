@@ -1,8 +1,22 @@
-<h1><%= @error.class %></h1>
-<p><%= @error.message %></p>
+<html>
+  <body style="max-width: 768px; margin: 0 auto;">
+    <h1 style="margin-top: 12px; font-family: sans-serif; font-size: 19px;"><%= @error.class %></h1>
+    <h2 style="font-family: sans-serif; font-size: 15px;"><%= @error.message %></h2>
 
-<div>
-  <table border="1">
-    <%= render(partial: "frame", collection: @backtrace) || render("no_backtrace") -%>
-  </table>
-</div>
+    <p data-test-id="source">Source: <%= @source ? @source : "No source present" %></p>
+    <p data-test-id="handled">Handled: <%= @handled ? "✅" : "❌" %></p>
+
+    <details style="margin-bottom: 12px;">
+      <summary>Stacktrace</summary>
+
+      <table data-test-id="backtrace" border="1" width="100%" style="margin-top: 12px; margin-bottom: 12px; border-collapse: collapse; border-color: #000000">
+        <%= render(partial: "frame", collection: @backtrace) || render("no_backtrace") -%>
+      </table>
+    </details>
+
+    <details>
+      <summary>Context</summary>
+      <pre data-test-id="context" style="font-family: mono; background: #eeeeee;"><code><%= @context %></code></pre>
+    </details>
+  </body>
+</html>
