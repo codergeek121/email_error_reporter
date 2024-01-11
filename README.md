@@ -28,6 +28,15 @@ All exceptions are reported automatically. No additional code required.
 
 Please consult the [official guides](https://guides.rubyonrails.org/error_reporting.html) for an introduction to the error reporting API.
 
+## Optional configuration
+
+Set a custom from address.
+
+```ruby
+# default: "no-reply@example.com"
+config.email_error_reporter.from = "your-custom-email@example.com"
+```
+
 ## Test your setup
 
 You can use the built-in rake task `rake email_error_reporter:check` to check if everything works correctly in your setup.

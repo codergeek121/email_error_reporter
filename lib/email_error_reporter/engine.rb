@@ -4,6 +4,7 @@ module EmailErrorReporter
 
     config.email_error_reporter = ActiveSupport::OrderedOptions.new
     config.email_error_reporter.to = []
+    config.email_error_reporter.from = "no-reply@example.com"
 
     initializer "email_error_reporter.error_subscribe" do
       Rails.error.subscribe(Subscriber.new)
