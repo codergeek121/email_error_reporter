@@ -1,3 +1,3 @@
 module EmailErrorReporter
-  VERSION = "0.1.0.pre"
+  VERSION = "0.2.0"
 end
