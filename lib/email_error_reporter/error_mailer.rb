@@ -17,6 +17,7 @@ module EmailErrorReporter
 
       mail(
         subject: "#{severity_to_emoji.fetch(@severity)}  #{error.class}",
+        from: Rails.application.config.email_error_reporter.from,
         to: Rails.application.config.email_error_reporter.to
       )
     end
