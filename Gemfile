@@ -12,3 +12,5 @@ gem "sqlite3"
 gem "debug", ">= 1.0.0"
 
 gem "rails-dom-testing"
+gem "appraisal"
+

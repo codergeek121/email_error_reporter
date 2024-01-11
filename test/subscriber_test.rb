@@ -11,13 +11,28 @@ class SubscriberTest < ActiveSupport::TestCase
     end
 
   rescue TestError => e
-    assert_enqueued_email_with EmailErrorReporter::ErrorMailer, :error, args: ->(args) {
-      # TODO: find out, why args.first == e is false
-      [
-        args.first.message == e.message,
-        args.first.backtrace == e.backtrace,
-        args.first.class == e.class
-      ].all?
-    }
+    # matcher
+    assert_enqueued_with(
+      job: ActionMailer::MailDeliveryJob,
+      args: ->(j) {
+        [
+          "EmailErrorReporter::ErrorMailer" == j[0],
+          "error" == j[1],
+          "deliver_now" == j[2],
+          e.class == j[3][:args][0].class,
+          { handled: false, context: {}, severity: :error, source: rails_default_source } == j[3][:args][1],
+        ].all?
+      }
+    )
+  end
+
+  private
+
+  def rails_default_source
+    if Gem::Version.new(Rails.version) >= Gem::Version.new("7.1.0")
+      "application"
+    else
+      nil
+    end
   end
 end
