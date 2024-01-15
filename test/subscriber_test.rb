@@ -26,6 +26,31 @@ class SubscriberTest < ActiveSupport::TestCase
     )
   end
 
+  test "enqueues no mail if disabled" do
+    old_config = Rails.application.config.email_error_reporter.enabled
+    Rails.application.config.email_error_reporter.enabled = false
+    Rails.error.record(TestError) do
+      raise TestError
+    end
+
+  rescue TestError => e
+    # matcher
+    assert_enqueued_with(
+      job: ActionMailer::MailDeliveryJob,
+      args: ->(j) {
+        [
+          "EmailErrorReporter::ErrorMailer" == j[0],
+          "error" == j[1],
+          "deliver_now" == j[2],
+          e.class == j[3][:args][0].class,
+          { handled: false, context: {}, severity: :error, source: rails_default_source } == j[3][:args][1],
+        ].all?
+      }
+    )
+  ensure
+    Rails.application.config.email_error_reporter.enabled = old_config
+  end
+
   private
 
   def rails_default_source
