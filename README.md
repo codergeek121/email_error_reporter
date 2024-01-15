@@ -10,7 +10,7 @@
 Add the gem:
 
 ```bash
-bundle add email_error_reporter && bundle install
+bundle add email_error_reporter
 ```
 
 and configure the email addresses that should receive an email in the case of an exception:
@@ -35,6 +35,14 @@ Set a custom from address.
 ```ruby
 # default: "no-reply@example.com"
 config.email_error_reporter.from = "your-custom-email@example.com"
+```
+
+Disables the email reports for specific environments. Mails are enabled by default on all envs.
+
+```ruby
+# e.g. in development.rb
+# default: true
+config.email_error_reporter.enabled = false
 ```
 
 ## Test your setup
