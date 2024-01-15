@@ -37,7 +37,9 @@ Set a custom from address.
 config.email_error_reporter.from = "your-custom-email@example.com"
 ```
 
-Disables the email reports for specific environments. Mails are enabled by default on all envs.
+---
+
+Disables the email reports for specific environments.
 
 ```ruby
 # e.g. in development.rb
@@ -51,9 +53,11 @@ You can use the built-in rake task `rake email_error_reporter:check` to check if
 
 If you're using Kamal, you can run the following command to test the setup in production:
 
-```
+```sh
 kamal app exec -p 'bundle exec rake email_error_reporter:test_email'
 ```
+
+If everything is setup correctly, this rake task will send a demo email to your configured `to` address with a sample exception.
 
 ## License
 
